@@ -16,7 +16,7 @@ export const Loading = () => {
           marginTop: 15,
         }}
       >
-        Завантаженняю...
+        Завантаження...
       </Text>
     </View>
   );

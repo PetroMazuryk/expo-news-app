@@ -6,12 +6,11 @@ import {
   Alert,
   View,
   FlatList,
-  ActivityIndicator,
-  Text,
   RefreshControl,
   TouchableOpacity,
 } from "react-native";
 import { Post } from "../components/Post";
+import { Loading } from "../components/Loading";
 
 export const HomeScreen = ({ navigation }) => {
   const [items, setItems] = useState();
@@ -36,24 +35,7 @@ export const HomeScreen = ({ navigation }) => {
   useEffect(fetchPost, []);
 
   if (isLoading) {
-    return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <ActivityIndicator size="large" />
-        <Text
-          style={{
-            marginTop: 15,
-          }}
-        >
-          Завантаження...
-        </Text>
-      </View>
-    );
+    return <Loading />;
   }
   return (
     <View style={styles.container}>
