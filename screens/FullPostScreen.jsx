@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import { Loading } from "../components/Loading";
+import imgDefault from "../assets/imgDefault.jpg";
 
 export const FullPostScreen = ({ route, navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,7 +34,10 @@ export const FullPostScreen = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.postImage} source={{ uri: data.imageUrl }} />
+      <Image
+        style={styles.postImage}
+        source={!data.imageUrl ? imgDefault : { uri: data.imageUrl }}
+      />
       <Text style={styles.postText}>{data.text}</Text>
     </View>
   );

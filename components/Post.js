@@ -1,4 +1,5 @@
 import { StyleSheet, View, Image, Text } from "react-native";
+import imgDefault from "../assets/imgDefault.jpg";
 
 const tranclateTitle = (str) => {
   if (str.length > 50) {
@@ -10,7 +11,10 @@ const tranclateTitle = (str) => {
 export const Post = ({ title, imageUrl, createdAt }) => {
   return (
     <View style={styles.post}>
-      <Image style={styles.img} source={{ uri: imageUrl }} />
+      <Image
+        style={styles.img}
+        source={!imageUrl ? imgDefault : { uri: imageUrl }}
+      />
       <View style={styles.postDetails}>
         <Text style={styles.postTitle}>{tranclateTitle(title)}</Text>
         <Text style={styles.postData}>
