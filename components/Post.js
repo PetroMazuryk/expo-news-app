@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   postDetails: {
+    flex: 1,
     justifyContent: "center",
   },
   postTitle: {

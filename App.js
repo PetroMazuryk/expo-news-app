@@ -1,15 +1,82 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  Alert,
+  View,
+  FlatList,
+  ActivityIndicator,
+  Text,
+  RefreshControl,
+} from "react-native";
 import { Post } from "./components/Post";
 
 export default function App() {
+  const [items, setItems] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  const fetchPost = () => {
+    setIsLoading(true);
+    axios
+      .get("https://642f4410b289b1dec4b00ecd.mockapi.io/api/v1/articles")
+      .then(({ data }) => {
+        setItems(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        Alert.alert("Помилка", "Невлалося отримати статті");
+        alert("Помилка при отриманні статей");
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+  useEffect(fetchPost, []);
+
+  if (isLoading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ActivityIndicator size="large" />
+        <Text
+          style={{
+            marginTop: 15,
+          }}
+        >
+          Завантаженняю...
+        </Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.container}>
-      <Post
-        title="Test "
-        imageUrl="https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE"
-        createAt="22.02.2024"
+      <FlatList
+        refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={fetchPost} />
+        }
+        data={items}
+        renderItem={({ item }) => (
+          <Post
+            title={item.title}
+            imageUrl={item.imageUrl}
+            createAt={item.createAt}
+          />
+        )}
       />
+      {/* {[...items, ...items].map((obj) => (
+        <Post
+          title={obj.title}
+          imageUrl={obj.imageUrl}
+          createAt={obj.createAt}
+        />
+      ))} */}
+
       <StatusBar style="auto" />
     </View>
   );
@@ -22,29 +89,4 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
   },
-  // post: {
-  //   flexDirection: "row",
-  //   padding: 26,
-  //   borderBottomWidth: 1,
-  //   borderBottomColor: "rgba(0,0,0,0.1)",
-  //   borderBottomStyle: "solid",
-  // },
-  // img: {
-  //   width: 60,
-  //   height: 60,
-  //   borderRadius: 12,
-  //   marginRight: 12,
-  // },
-  // postDetails: {
-  //   justifyContent: "center",
-  // },
-  // postTitle: {
-  //   fontSize: 14,
-  //   fontWeight: "700",
-  // },
-  // postData: {
-  //   fontSize: 12,
-  //   color: "rgba(0,0,0,0.6)",
-  //   marginTop: 2,
-  // },
 });
