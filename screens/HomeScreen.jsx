@@ -74,7 +74,7 @@ export const HomeScreen = ({ navigation }) => {
             <Post
               title={item.title}
               imageUrl={item.imageUrl}
-              createAt={item.createAt}
+              createdAt={item.createdAt}
             />
           </TouchableOpacity>
         )}

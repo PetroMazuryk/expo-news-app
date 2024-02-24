@@ -13,7 +13,9 @@ export const Post = ({ title, imageUrl, createdAt }) => {
       <Image style={styles.img} source={{ uri: imageUrl }} />
       <View style={styles.postDetails}>
         <Text style={styles.postTitle}>{tranclateTitle(title)}</Text>
-        <Text style={styles.postData}>{createdAt}</Text>
+        <Text style={styles.postData}>
+          {new Date(createdAt).toLocaleDateString()}
+        </Text>
       </View>
     </View>
   );
