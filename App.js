@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Text,
   RefreshControl,
+  TouchableOpacity,
 } from "react-native";
 import { Post } from "./components/Post";
 
@@ -62,11 +63,13 @@ export default function App() {
         }
         data={items}
         renderItem={({ item }) => (
-          <Post
-            title={item.title}
-            imageUrl={item.imageUrl}
-            createAt={item.createAt}
-          />
+          <TouchableOpacity>
+            <Post
+              title={item.title}
+              imageUrl={item.imageUrl}
+              createAt={item.createAt}
+            />
+          </TouchableOpacity>
         )}
       />
       {/* {[...items, ...items].map((obj) => (
