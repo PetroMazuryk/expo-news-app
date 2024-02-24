@@ -1,10 +1,18 @@
 import { StyleSheet, View, Image, Text } from "react-native";
+
+const tranclateTitle = (str) => {
+  if (str.length > 50) {
+    return str.substring(0, 50) + "...";
+  }
+  return str;
+};
+
 export const Post = ({ title, imageUrl, createdAt }) => {
   return (
     <View style={styles.post}>
       <Image style={styles.img} source={{ uri: imageUrl }} />
       <View style={styles.postDetails}>
-        <Text style={styles.postTitle}>{title}</Text>
+        <Text style={styles.postTitle}>{tranclateTitle(title)}</Text>
         <Text style={styles.postData}>{createdAt}</Text>
       </View>
     </View>
