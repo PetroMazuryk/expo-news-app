@@ -1,11 +1,11 @@
 import { StyleSheet, View, Image, Text } from "react-native";
-export const Post = ({ title, imageUrl, createAt }) => {
+export const Post = ({ title, imageUrl, createdAt }) => {
   return (
     <View style={styles.post}>
       <Image style={styles.img} source={{ uri: imageUrl }} />
       <View style={styles.postDetails}>
         <Text style={styles.postTitle}>{title}</Text>
-        <Text style={styles.postData}>{createAt}</Text>
+        <Text style={styles.postData}>{createdAt}</Text>
       </View>
     </View>
   );
@@ -13,8 +13,10 @@ export const Post = ({ title, imageUrl, createAt }) => {
 
 const styles = StyleSheet.create({
   post: {
+    display: "flex",
+    alignItems: "center",
     flexDirection: "row",
-    padding: 26,
+    padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(0,0,0,0.1)",
     borderBottomStyle: "solid",

@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { Post } from "../components/Post";
 
-export const HomeScreen = () => {
+export const HomeScreen = ({ navigation }) => {
   const [items, setItems] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -50,7 +50,7 @@ export const HomeScreen = () => {
             marginTop: 15,
           }}
         >
-          Завантаженняю...
+          Завантаження...
         </Text>
       </View>
     );
@@ -63,7 +63,7 @@ export const HomeScreen = () => {
         }
         data={items}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate("FullPost")}>
             <Post
               title={item.title}
               imageUrl={item.imageUrl}
